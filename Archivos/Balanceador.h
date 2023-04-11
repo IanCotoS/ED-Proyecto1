@@ -1,0 +1,5 @@
+
+#ifndef BALANCEADOR_H
+#define BALANCEADOR_H
+
+#endif // BALANCEADOR_H

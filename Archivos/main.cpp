@@ -1,13 +1,9 @@
-
-#include "armazon.h"
-
 #include <QApplication>
 
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    Armazon w;
-    w.show();
+    QCoreApplication a(argc, argv);
+    qDebug() << 2;
     return a.exec();
 }
