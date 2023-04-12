@@ -16,6 +16,7 @@ SOURCES += \
     Clientes.cpp \
     Fabricas.cpp \
     Facturados.cpp \
+    LibreriasBasicas.cpp \
     Pedidos.cpp \
     main.cpp
 
