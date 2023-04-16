@@ -99,3 +99,49 @@ bool ListaArticulos::validarUbicacion(QString pUbicacion){
     QRegularExpressionMatch match = re.match(pUbicacion);
     return match.hasMatch();
 }
+
+void ListaArticulos::limpiarMemoria(){
+    NodoArticulo * tmp = primerNodo;
+    NodoArticulo * sig;
+    while (tmp != NULL) {
+        sig = tmp->siguiente;
+        delete tmp;
+        tmp = sig;
+    }
+    primerNodo = NULL;
+}
+
+bool ListaArticulos::validarDatos(QString pCodigo, QString pCantidadAlmacen, QString pTiempoFabricacionSegundos,
+                  QString pCategoria, QString pUbicacionBodega){
+    if(!(validarCodigo(pCodigo) && validarCantidad(pCantidadAlmacen) &&
+          validarTiempo(pTiempoFabricacionSegundos) && validarCategoria(pCategoria) &&
+          validarUbicacion(pUbicacionBodega)))
+        return false;
+    return true;
+}
+
+QStringList * ListaArticulos::separaAtributos(QString str){ // Puede meterse en otro archivo,
+    // ya que se ocupa en más structs
+    QStringList * list = new QStringList();
+    static QRegularExpression re("\\s+");
+    (*list) = str.split(re);
+    return list;
+}
+
+bool ListaArticulos::cargarEnMemoria(){
+    QString str = retornarTextoArchivo("C:\\Users\\sotic\\"
+                                       "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaArticulos.txt");
+    QStringList * list = separaAtributos(str);
+    for (int i = 0; i < list->length(); i+=5){
+        if (!validarDatos(list->at(i), list->at(i+1), list->at(i+2), list->at(i+3), list->at(i+4))){
+            limpiarMemoria();
+            delete this; // Se eliminan ambas listas evitando un leak de memoria
+            delete list;
+            return false;
+        }
+        this->insertarAlFinal(new Articulo(list->at(i), list->at(i+1).toInt(), list->at(i+2).toInt(),
+                                           list->at(i+3), list->at(i+4)));
+    }
+    delete list;
+    return true;
+}
