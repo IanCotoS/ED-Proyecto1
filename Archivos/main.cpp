@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    /* Archivos
+    /*Archivos
     qDebug() << crearArchivoTxt("C:\\Users\\sotic\\"
                                 "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaClientes.txt", "001\tPedro\t10\r\n002\tMaría\t5\r\n003\tJuan\t9");
     qDebug() << retornarTextoArchivo("C:\\Users\\sotic\\"
@@ -15,20 +15,16 @@ int main(int argc, char *argv[])
     */
 
     /* Pruebas Clientes
-    ListaClientes * lista = new ListaClientes();
-    qDebug() << lista->validarPrioridad("0");
+    ListaClientes * listaClientes = new ListaClientes();
+    listaClientes = listaClientes->cargarEnMemoria();
+    qDebug() << listaClientes->devuelveInfo();
     */
 
-    /* Pruebas Articulos
-    ListaArticulos * listaArt = new ListaArticulos();
-    qDebug() << listaArt->validarCodigo("A23");
-    qDebug() << listaArt->validarCantidad("2");
-    qDebug() << listaArt->validarTiempo("0");
-    qDebug() << listaArt->validarCategoria("B");
-    qDebug() << listaArt->validarUbicacion("V43");
-    qDebug() << listaArt->validarUbicacion("V00");
-    qDebug() << listaArt->validarUbicacion("V10");
-    qDebug() << listaArt->validarUbicacion("V11");
-    */
+    // Pruebas Articulos
+    ListaArticulos * listaArticulos = new ListaArticulos();
+    listaArticulos = listaArticulos->cargarEnMemoria();
+    qDebug() << listaArticulos->devuelveInfo();
+    delete listaArticulos;
+
     return a.exec();
 }

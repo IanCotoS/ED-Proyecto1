@@ -71,9 +71,13 @@ struct ListaClientes{
     // Encabezado de funciones
     void insertarAlInicio(Cliente *);
     void insertarAlFinal(Cliente *);
+    void limpiarMemoria();
     QString devuelveInfo();
     int largo();
     bool existeCodigo(QString);
     bool validarCodigo(QString);
     bool validarPrioridad(QString);
+    bool validarDatos(QString, QString);
+    QStringList * separaAtributos(QString);
+    ListaClientes * cargarEnMemoria();
 }; // Fin Struct ListaClientes
