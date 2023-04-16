@@ -14,17 +14,21 @@ int main(int argc, char *argv[])
                             // Solo así me sirvió la lectura porque la dirección no me servía, cambiarlo luego
     */
 
-    /* Pruebas Clientes
+    // Pruebas Clientes
     ListaClientes * listaClientes = new ListaClientes();
-    listaClientes = listaClientes->cargarEnMemoria();
-    qDebug() << listaClientes->devuelveInfo();
-    */
+    if(listaClientes->cargarEnMemoria())
+        qInfo() << listaClientes->devuelveInfo();
+    else{
+        qInfo() << "Falló";
+    }
 
     // Pruebas Articulos
     ListaArticulos * listaArticulos = new ListaArticulos();
-    listaArticulos = listaArticulos->cargarEnMemoria();
-    qDebug() << listaArticulos->devuelveInfo();
-    delete listaArticulos;
+    if(listaArticulos->cargarEnMemoria())
+        qInfo() << listaArticulos->devuelveInfo();
+    else{
+        qInfo() << "Falló";
+    }
 
     return a.exec();
 }

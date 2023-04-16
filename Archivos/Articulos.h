@@ -108,26 +108,29 @@ struct ListaArticulos{
         return true;
     }
 
-    QStringList separaAtributos(QString str){ // Puede meterse en otro archivo,
+    QStringList * separaAtributos(QString str){ // Puede meterse en otro archivo,
         // ya que se ocupa en más structs
+        QStringList * list = new QStringList();
         static QRegularExpression re("\\s+");
-        return str.split(re);
+        (*list) = str.split(re);
+        return list;
     }
 
-    ListaArticulos * cargarEnMemoria(){
-        ListaArticulos * listaArticulos = new ListaArticulos();
+    bool cargarEnMemoria(){
         QString str = retornarTextoArchivo("C:\\Users\\sotic\\"
                                            "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaArticulos.txt");
-        QStringList list = separaAtributos(str);
-        for (int i = 0; i < list.length(); i+=5){
-            if (!validarDatos(list.at(i), list.at(i+1), list.at(i+2), list.at(i+3), list.at(i+4))){
+        QStringList * list = separaAtributos(str);
+        for (int i = 0; i < list->length(); i+=5){
+            if (!validarDatos(list->at(i), list->at(i+1), list->at(i+2), list->at(i+3), list->at(i+4))){
                 limpiarMemoria();
-                delete listaArticulos; // Se eliminan ambas listas evitando un leak de memoria
-                return NULL; // Luego, en la simulación, se debe evaluar si no es null para seguir
+                delete this; // Se eliminan ambas listas evitando un leak de memoria
+                delete list;
+                return false;
             }
-            listaArticulos->insertarAlFinal(new Articulo(list.at(i), list.at(i+1).toInt(), list.at(i+2).toInt(),
-                                                         list.at(i+3), list.at(i+4)));
+            this->insertarAlFinal(new Articulo(list->at(i), list->at(i+1).toInt(), list->at(i+2).toInt(),
+                                                         list->at(i+3), list->at(i+4)));
         }
-        return listaArticulos;
+        delete list;
+        return true;
     }
 }; // Fin Struct ListaArticulos

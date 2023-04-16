@@ -79,5 +79,5 @@ struct ListaClientes{
     bool validarPrioridad(QString);
     bool validarDatos(QString, QString);
     QStringList * separaAtributos(QString);
-    ListaClientes * cargarEnMemoria();
+    bool cargarEnMemoria();
 }; // Fin Struct ListaClientes

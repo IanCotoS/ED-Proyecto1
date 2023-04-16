@@ -104,8 +104,7 @@ QStringList * ListaClientes::separaAtributos(QString str){ // Puede meterse en o
     return list;
 }
 
-ListaClientes * ListaClientes::cargarEnMemoria(){
-    ListaClientes * listaClientes = new ListaClientes();
+bool ListaClientes::cargarEnMemoria(){
     QString str = retornarTextoArchivo("C:\\Users\\sotic\\"
                                        "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaClientes.txt");
     QStringList * list = separaAtributos(str);
@@ -113,11 +112,11 @@ ListaClientes * ListaClientes::cargarEnMemoria(){
         if (!validarDatos(list->at(i), list->at(i+2))){
             limpiarMemoria();
             delete list;
-            delete listaClientes; // Se eliminan ambas listas evitando un leak de memoria
-            return NULL; // Luego, en la simulación, se debe evaluar si no es null para seguir
+            delete this; // Se eliminan ambas listas evitando un leak de memoria
+            return false; // Luego, en la simulación, se debe evaluar si no es null para seguir
         }
-        listaClientes->insertarAlFinal(new Cliente(list->at(i), list->at(i+1), list->at(i+2).toInt()));
+        this->insertarAlFinal(new Cliente(list->at(i), list->at(i+1), list->at(i+2).toInt()));
     }
     delete list; // Se elimina la lista que no se ocupa
-    return listaClientes;
+    return true;
 }

@@ -56,6 +56,7 @@ QString ListaArticulos::devuelveInfo(){
         info += tmp->devuelveInfo();
         tmp = tmp->siguiente;
     }
+    delete tmp;
     return (info + "\n");
 }
 
@@ -82,7 +83,7 @@ bool ListaArticulos::validarCantidad(QString pCantidad){
 }
 
 bool ListaArticulos::validarTiempo(QString pTiempo){
-    static QRegularExpression re("^[1-9](\\d+)$");
+    static QRegularExpression re("^([1-9]\\d+|[1-9])$");
     QRegularExpressionMatch match = re.match(pTiempo);
     return match.hasMatch();
 }
