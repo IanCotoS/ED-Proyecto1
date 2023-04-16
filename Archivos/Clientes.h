@@ -5,6 +5,13 @@
 
 #endif // CLIENTES_H
 
+// Declaraciones struct
+struct Cliente;
+struct NodoCliente;
+struct ListaClientes;
+
+// Structs
+// Struct Cliente
 struct Cliente{
 
     // Miembros
@@ -21,24 +28,36 @@ struct Cliente{
 
     // Encabezado de funciones
     QString devuelveInfo();
-};
+}; // Fin Struct Cliente
 
+// Struct NodoCliente
 struct NodoCliente{
 
     // Miembros
-    Cliente * cliente; // Dato
-    NodoCliente * siguiente; // Puntero para enlazar nodos
+    Cliente * cliente;
+    NodoCliente * siguiente;
 
-    // Constructor
+    // Constructores
+    NodoCliente(){
+        cliente = NULL;
+        siguiente = NULL;
+    }
+
     NodoCliente(Cliente * pCliente){
         cliente = pCliente;
-        siguiente = NULL; // sig es null
+        siguiente = NULL;
+    }
+
+    NodoCliente(QString pCodigo, QString pNombre, int pPrioridad){
+        cliente = new Cliente(pCodigo, pNombre, pPrioridad);
+        siguiente = NULL;
     }
 
     // Encabezado de funciones
     QString devuelveInfo();
-};
+}; // Fin Struct NodoCliente
 
+// Struct ListaClientes
 struct ListaClientes{
 
     // Miembros
@@ -57,4 +76,4 @@ struct ListaClientes{
     bool existeCodigo(QString);
     bool validarCodigo(QString);
     bool validarPrioridad(QString);
-};
+}; // Fin Struct ListaClientes
