@@ -114,11 +114,11 @@ void ListaArticulos::limpiarMemoria(){
 
 bool ListaArticulos::validarDatos(QString pCodigo, QString pCantidadAlmacen, QString pTiempoFabricacionSegundos,
                   QString pCategoria, QString pUbicacionBodega){
-    if(!(validarCodigo(pCodigo) && validarCantidad(pCantidadAlmacen) &&
+    if(validarCodigo(pCodigo) && validarCantidad(pCantidadAlmacen) &&
           validarTiempo(pTiempoFabricacionSegundos) && validarCategoria(pCategoria) &&
-          validarUbicacion(pUbicacionBodega)))
-        return false;
-    return true;
+          validarUbicacion(pUbicacionBodega))
+        return true;
+    return false;
 }
 
 QStringList ListaArticulos::separaAtributos(QString str){ // Puede meterse en otro archivo,
@@ -132,7 +132,7 @@ bool ListaArticulos::cargarEnMemoria(){
                                        "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaArticulos.txt");
     QStringList list = separaAtributos(str);
     for (int i = 0; i < list.length(); i+=5){
-        if (!validarDatos(list.at(i), list.at(i+1), list.at(i+2), list.at(i+3), list.at(i+4))){
+        if (!validarDatos(list.at(i), list.at(i+1), list.at(i+2), list.at(i+3), list.at(i+4)) || existeCodigo(list.at(i))){
             limpiarMemoria();
             return false;
         }

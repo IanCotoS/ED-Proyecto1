@@ -92,8 +92,8 @@ bool ListaClientes::validarPrioridad(QString pPrioridad){ // Puede hacerse una s
 }
 
 bool ListaClientes::validarDatos(QString pCodigo, QString pPrioridad){
-    if(!(validarCodigo(pCodigo) && validarPrioridad(pPrioridad)))
-        return false;
+    if(validarCodigo(pCodigo) && validarPrioridad(pPrioridad))
+        return true;
     return true;
 }
 
@@ -108,7 +108,7 @@ bool ListaClientes::cargarEnMemoria(){
                                        "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaClientes.txt");
     QStringList list = separaAtributos(str);
     for (int i = 0; i < list.length(); i+=3){
-        if (!validarDatos(list.at(i), list.at(i+2))){
+        if (!validarDatos(list.at(i), list.at(i+2)) || existeCodigo(list.at(i))){
             limpiarMemoria();
             return false; // Luego, en la simulación, se debe evaluar si no es null para seguir
         }
