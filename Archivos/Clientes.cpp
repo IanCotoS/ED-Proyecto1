@@ -78,29 +78,10 @@ bool ListaClientes::existeCodigo(QString pCodigo){
     return false;
 }
 
-bool ListaClientes::validarCodigo(QString pCodigo){
-    static QRegularExpression re("^\\d{3}$");
-    QRegularExpressionMatch match = re.match(pCodigo);
-    return match.hasMatch();
-}
-
-bool ListaClientes::validarPrioridad(QString pPrioridad){ // Puede hacerse una sola con dos parámetros,
-                                                          // un QString a comprobar y la re a comparar
-    static QRegularExpression re("^([1-9]|10){1}$");
-    QRegularExpressionMatch match = re.match(pPrioridad);
-    return match.hasMatch();
-}
-
 bool ListaClientes::validarDatos(QString pCodigo, QString pPrioridad){
-    if(validarCodigo(pCodigo) && validarPrioridad(pPrioridad))
+    if(validarFormato(pCodigo, reCodigoCliente) && validarFormato(pPrioridad, rePrioridad))
         return true;
     return true;
-}
-
-QStringList ListaClientes::separaAtributos(QString str){ // Puede meterse en otro archivo,
-                                                           // ya que se ocupa en más structs
-    static QRegularExpression re("\\s+");
-    return str.split(re);
 }
 
 bool ListaClientes::cargarEnMemoria(){

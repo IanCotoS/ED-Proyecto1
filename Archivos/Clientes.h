@@ -5,6 +5,11 @@
 
 #endif // CLIENTES_H
 
+// Variables
+// Expresiones regulares
+QRegularExpression reCodigoCliente("^\\d{3}$");
+QRegularExpression rePrioridad("^([1-9]|10){1}$");
+
 // Declaraciones struct
 struct Cliente;
 struct NodoCliente;
@@ -75,9 +80,6 @@ struct ListaClientes{
     QString devuelveInfo();
     int largo();
     bool existeCodigo(QString);
-    bool validarCodigo(QString);
-    bool validarPrioridad(QString);
     bool validarDatos(QString, QString);
-    QStringList separaAtributos(QString);
     bool cargarEnMemoria();
 }; // Fin Struct ListaClientes

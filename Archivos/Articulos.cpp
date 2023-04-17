@@ -70,36 +70,6 @@ bool ListaArticulos::existeCodigo(QString pCodigo){
     return false;
 }
 
-bool ListaArticulos::validarCodigo(QString pCodigo){
-    static QRegularExpression re("^[A-Z]\\d{2}$");
-    QRegularExpressionMatch match = re.match(pCodigo);
-    return match.hasMatch();
-}
-
-bool ListaArticulos::validarCantidad(QString pCantidad){
-    static QRegularExpression re("^\\d+$");
-    QRegularExpressionMatch match = re.match(pCantidad);
-    return match.hasMatch();
-}
-
-bool ListaArticulos::validarTiempo(QString pTiempo){
-    static QRegularExpression re("^([1-9]\\d+|[1-9])$");
-    QRegularExpressionMatch match = re.match(pTiempo);
-    return match.hasMatch();
-}
-
-bool ListaArticulos::validarCategoria(QString pCategoria){
-    static QRegularExpression re("^(A|B|C)$");
-    QRegularExpressionMatch match = re.match(pCategoria);
-    return match.hasMatch();
-}
-
-bool ListaArticulos::validarUbicacion(QString pUbicacion){
-    static QRegularExpression re("^[A-Z](0[1-9]|10){1}$");
-    QRegularExpressionMatch match = re.match(pUbicacion);
-    return match.hasMatch();
-}
-
 void ListaArticulos::limpiarMemoria(){
     NodoArticulo * tmp = primerNodo;
     NodoArticulo * sig;
@@ -114,17 +84,11 @@ void ListaArticulos::limpiarMemoria(){
 
 bool ListaArticulos::validarDatos(QString pCodigo, QString pCantidadAlmacen, QString pTiempoFabricacionSegundos,
                   QString pCategoria, QString pUbicacionBodega){
-    if(validarCodigo(pCodigo) && validarCantidad(pCantidadAlmacen) &&
-          validarTiempo(pTiempoFabricacionSegundos) && validarCategoria(pCategoria) &&
-          validarUbicacion(pUbicacionBodega))
+    if (validarFormato(pCodigo, *reCodigoArticulo) && validarFormato(pCantidadAlmacen, *reCantidadEnAlmacen) &&
+        validarFormato(pTiempoFabricacionSegundos, *reTiempoFabricacionSeg) &&
+        validarFormato(pCategoria, *reCategoria) && validarFormato(pUbicacionBodega, *reUbicacionBodega))
         return true;
     return false;
-}
-
-QStringList ListaArticulos::separaAtributos(QString str){ // Puede meterse en otro archivo,
-    // ya que se ocupa en más structs
-    static QRegularExpression re("\\s+");
-    return str.split(re);
 }
 
 bool ListaArticulos::cargarEnMemoria(){

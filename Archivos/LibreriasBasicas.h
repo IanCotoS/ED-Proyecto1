@@ -13,5 +13,8 @@ using namespace std;
 
 #endif // LIBRERIASBASICAS_H
 
-QString retornarTextoArchivo(QString pNombreArchivo);
-QString crearArchivoTxt(QString pNombreArchivo, QString pContenido);
+// Declaración de funciones
+QString retornarTextoArchivo(QString);
+QString crearArchivoTxt(QString, QString);
+QStringList separaAtributos(QString);
+bool validarFormato(QString, QRegularExpression);

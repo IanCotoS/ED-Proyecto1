@@ -34,3 +34,14 @@ QString crearArchivoTxt(QString pNombreArchivo, QString pContenido){
     file.close();
     return texto;
 }
+
+QStringList separaAtributos(QString str){
+    // Separa los datos en una lista temporal por los espacios (\t, \n, \r\n)
+    static QRegularExpression re("\\s+");
+    return str.split(re);
+}
+
+bool validarFormato(QString pString, QRegularExpression pExpresionRegular){
+    QRegularExpressionMatch match = pExpresionRegular.match(pString);
+    return match.hasMatch();
+}
