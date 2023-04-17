@@ -94,7 +94,7 @@ bool ListaClientes::validarPrioridad(QString pPrioridad){ // Puede hacerse una s
 bool ListaClientes::validarDatos(QString pCodigo, QString pPrioridad){
     if(validarCodigo(pCodigo) && validarPrioridad(pPrioridad))
         return true;
-    return true;
+    return false;
 }
 
 QStringList ListaClientes::separaAtributos(QString str){ // Puede meterse en otro archivo,
