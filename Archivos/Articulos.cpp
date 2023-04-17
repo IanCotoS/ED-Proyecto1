@@ -109,6 +109,7 @@ void ListaArticulos::limpiarMemoria(){
         tmp = sig;
     }
     primerNodo = NULL;
+    delete this; // Se elimina en memoria todo
 }
 
 bool ListaArticulos::validarDatos(QString pCodigo, QString pCantidadAlmacen, QString pTiempoFabricacionSegundos,
@@ -120,28 +121,23 @@ bool ListaArticulos::validarDatos(QString pCodigo, QString pCantidadAlmacen, QSt
     return true;
 }
 
-QStringList * ListaArticulos::separaAtributos(QString str){ // Puede meterse en otro archivo,
+QStringList ListaArticulos::separaAtributos(QString str){ // Puede meterse en otro archivo,
     // ya que se ocupa en más structs
-    QStringList * list = new QStringList();
     static QRegularExpression re("\\s+");
-    (*list) = str.split(re);
-    return list;
+    return str.split(re);
 }
 
 bool ListaArticulos::cargarEnMemoria(){
     QString str = retornarTextoArchivo("C:\\Users\\sotic\\"
                                        "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaArticulos.txt");
-    QStringList * list = separaAtributos(str);
-    for (int i = 0; i < list->length(); i+=5){
-        if (!validarDatos(list->at(i), list->at(i+1), list->at(i+2), list->at(i+3), list->at(i+4))){
+    QStringList list = separaAtributos(str);
+    for (int i = 0; i < list.length(); i+=5){
+        if (!validarDatos(list.at(i), list.at(i+1), list.at(i+2), list.at(i+3), list.at(i+4))){
             limpiarMemoria();
-            delete this; // Se eliminan ambas listas evitando un leak de memoria
-            delete list;
             return false;
         }
-        this->insertarAlFinal(new Articulo(list->at(i), list->at(i+1).toInt(), list->at(i+2).toInt(),
-                                           list->at(i+3), list->at(i+4)));
+        this->insertarAlFinal(new Articulo(list.at(i), list.at(i+1).toInt(), list.at(i+2).toInt(),
+                                           list.at(i+3), list.at(i+4)));
     }
-    delete list;
     return true;
 }

@@ -89,6 +89,6 @@ struct ListaArticulos{
     bool validarUbicacion(QString);
     void limpiarMemoria();
     bool validarDatos(QString, QString, QString, QString, QString);
-    QStringList * separaAtributos(QString);
+    QStringList separaAtributos(QString);
     bool cargarEnMemoria();
 }; // Fin Struct ListaArticulos

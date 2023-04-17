@@ -78,6 +78,6 @@ struct ListaClientes{
     bool validarCodigo(QString);
     bool validarPrioridad(QString);
     bool validarDatos(QString, QString);
-    QStringList * separaAtributos(QString);
+    QStringList separaAtributos(QString);
     bool cargarEnMemoria();
 }; // Fin Struct ListaClientes

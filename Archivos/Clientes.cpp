@@ -45,6 +45,7 @@ void ListaClientes::limpiarMemoria(){
         tmp = sig;
     }
     primerNodo = NULL;
+    delete this; // Se elimina en memoria todo
 }
 
 QString ListaClientes::devuelveInfo(){
@@ -96,27 +97,22 @@ bool ListaClientes::validarDatos(QString pCodigo, QString pPrioridad){
     return true;
 }
 
-QStringList * ListaClientes::separaAtributos(QString str){ // Puede meterse en otro archivo,
+QStringList ListaClientes::separaAtributos(QString str){ // Puede meterse en otro archivo,
                                                            // ya que se ocupa en más structs
-    QStringList * list = new QStringList();
     static QRegularExpression re("\\s+");
-    (*list) = str.split(re);
-    return list;
+    return str.split(re);
 }
 
 bool ListaClientes::cargarEnMemoria(){
     QString str = retornarTextoArchivo("C:\\Users\\sotic\\"
                                        "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaClientes.txt");
-    QStringList * list = separaAtributos(str);
-    for (int i = 0; i < list->length(); i+=3){
-        if (!validarDatos(list->at(i), list->at(i+2))){
+    QStringList list = separaAtributos(str);
+    for (int i = 0; i < list.length(); i+=3){
+        if (!validarDatos(list.at(i), list.at(i+2))){
             limpiarMemoria();
-            delete list;
-            delete this; // Se eliminan ambas listas evitando un leak de memoria
             return false; // Luego, en la simulación, se debe evaluar si no es null para seguir
         }
-        this->insertarAlFinal(new Cliente(list->at(i), list->at(i+1), list->at(i+2).toInt()));
+        this->insertarAlFinal(new Cliente(list.at(i), list.at(i+1), list.at(i+2).toInt()));
     }
-    delete list; // Se elimina la lista que no se ocupa
     return true;
 }
