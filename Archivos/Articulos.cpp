@@ -1,5 +1,13 @@
 #include "Articulos.h"
 
+// Variables
+// Expresiones regulares
+QRegularExpression reCodigoArticulo("^[A-Z]\\d{2}$");
+QRegularExpression reCantidadEnAlmacen("^\\d+$");
+QRegularExpression reTiempoFabricacionSeg("^([1-9]\\d+|[1-9])$");
+QRegularExpression reCategoria("^(A|B|C)$");
+QRegularExpression reUbicacionBodega("^[A-Z](0[1-9]|10){1}$");
+
 // Métodos Articulo
 QString Articulo::devuelveInfo(){
     return ("\nCódigo " + codigo + "\nCantidad en almacen: " + QString::number(cantidadAlmacen) +
@@ -84,9 +92,9 @@ void ListaArticulos::limpiarMemoria(){
 
 bool ListaArticulos::validarDatos(QString pCodigo, QString pCantidadAlmacen, QString pTiempoFabricacionSegundos,
                   QString pCategoria, QString pUbicacionBodega){
-    if (validarFormato(pCodigo, *reCodigoArticulo) && validarFormato(pCantidadAlmacen, *reCantidadEnAlmacen) &&
-        validarFormato(pTiempoFabricacionSegundos, *reTiempoFabricacionSeg) &&
-        validarFormato(pCategoria, *reCategoria) && validarFormato(pUbicacionBodega, *reUbicacionBodega))
+    if (validarFormato(pCodigo, reCodigoArticulo) && validarFormato(pCantidadAlmacen, reCantidadEnAlmacen) &&
+        validarFormato(pTiempoFabricacionSegundos, reTiempoFabricacionSeg) &&
+        validarFormato(pCategoria, reCategoria) && validarFormato(pUbicacionBodega, reUbicacionBodega))
         return true;
     return false;
 }

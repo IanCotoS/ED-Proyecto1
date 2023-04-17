@@ -5,14 +5,6 @@
 
 #endif // ARTICULOS_H
 
-// Variables
-// Expresiones regulares
-QRegularExpression * reCodigoArticulo = new QRegularExpression("^[A-Z]\\d{2}$");
-QRegularExpression * reCantidadEnAlmacen = new QRegularExpression("^\\d+$");
-QRegularExpression * reTiempoFabricacionSeg = new QRegularExpression("^([1-9]\\d+|[1-9])$");
-QRegularExpression * reCategoria = new QRegularExpression("^(A|B|C)$");
-QRegularExpression * reUbicacionBodega = new QRegularExpression("^[A-Z](0[1-9]|10){1}$");
-
 // Declaración de structs
 struct Articulo;
 struct NodoArticulo;

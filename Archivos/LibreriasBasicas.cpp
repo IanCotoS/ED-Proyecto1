@@ -42,6 +42,7 @@ QStringList separaAtributos(QString str){
 }
 
 bool validarFormato(QString pString, QRegularExpression pExpresionRegular){
+    // Valida el formato de la expresión regular contra el string
     QRegularExpressionMatch match = pExpresionRegular.match(pString);
     return match.hasMatch();
 }

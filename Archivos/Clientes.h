@@ -5,11 +5,6 @@
 
 #endif // CLIENTES_H
 
-// Variables
-// Expresiones regulares
-QRegularExpression reCodigoCliente("^\\d{3}$");
-QRegularExpression rePrioridad("^([1-9]|10){1}$");
-
 // Declaraciones struct
 struct Cliente;
 struct NodoCliente;

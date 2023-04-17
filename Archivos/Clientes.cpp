@@ -1,5 +1,10 @@
 #include "Clientes.h"
 
+// Variables
+// Expresiones regulares
+QRegularExpression reCodigoCliente("^\\d{3}$");
+QRegularExpression rePrioridad("^([1-9]|10){1}$");
+
 // Funciones Cliente
 QString Cliente::devuelveInfo(){
     return "\nCliente " + codigo + "\nNombre: " + nombre + "\nPrioridad: " +  QString::number(prioridad);
@@ -81,7 +86,7 @@ bool ListaClientes::existeCodigo(QString pCodigo){
 bool ListaClientes::validarDatos(QString pCodigo, QString pPrioridad){
     if(validarFormato(pCodigo, reCodigoCliente) && validarFormato(pPrioridad, rePrioridad))
         return true;
-    return true;
+    return false;
 }
 
 bool ListaClientes::cargarEnMemoria(){
