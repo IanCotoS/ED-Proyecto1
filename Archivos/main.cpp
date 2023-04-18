@@ -17,23 +17,15 @@ int main(int argc, char *argv[])
     qDebug() << separaAtributos(str);
     */
 
-    /* Pruebas Clientes
+    // Pruebas Clientes
     ListaClientes * listaClientes = new ListaClientes();
     if(listaClientes->cargarEnMemoria())
         qInfo() << listaClientes->devuelveInfo();
-    else{
-        qInfo() << "Falló";
-    }
-    */
 
-    /* Pruebas Articulos
+    // Pruebas Articulos
     ListaArticulos * listaArticulos = new ListaArticulos();
     if(listaArticulos->cargarEnMemoria())
         qInfo() << listaArticulos->devuelveInfo();
-    else{
-        qInfo() << "Falló";
-    }
-    */
 
     return a.exec();
 }

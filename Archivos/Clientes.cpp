@@ -76,17 +76,26 @@ int ListaClientes::largo(){
 bool ListaClientes::existeCodigo(QString pCodigo){
     NodoCliente * tmp = primerNodo;
     while(tmp != NULL){
-        if (tmp->cliente->codigo == pCodigo)
+        if (tmp->cliente->codigo == pCodigo){
+            qCritical() << "El código " + pCodigo + " ya se encuentra en la lista de clientes.";
             return true;
+        }
         tmp = tmp->siguiente;
     }
     return false;
 }
 
 bool ListaClientes::validarDatos(QString pCodigo, QString pPrioridad){
-    if(validarFormato(pCodigo, reCodigoCliente) && validarFormato(pPrioridad, rePrioridad))
-        return true;
-    return false;
+    if (!validarFormato(pCodigo, reCodigoCliente)){
+        qCritical() << "El código del cliente " + pCodigo + " cuenta con un formato incorrecto.";
+        return false;
+    }
+    else if (!validarFormato(pPrioridad, rePrioridad)){
+        qCritical() << "La prioridad de los clientes debe ser un número entre 1 y 10 (" <<
+                    pPrioridad << ")";
+        return false;
+    }
+    return true;
 }
 
 bool ListaClientes::cargarEnMemoria(){
@@ -95,6 +104,7 @@ bool ListaClientes::cargarEnMemoria(){
     QStringList list = separaAtributos(str);
     for (int i = 0; i < list.length(); i+=3){
         if (!validarDatos(list.at(i), list.at(i+2)) || existeCodigo(list.at(i))){
+            qCritical() << "Error en la línea" << largo()+1 << "en el archivo de los clientes";
             limpiarMemoria();
             return false; // Luego, en la simulación, se debe evaluar si no es null para seguir
         }

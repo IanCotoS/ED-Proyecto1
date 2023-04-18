@@ -71,8 +71,10 @@ QString ListaArticulos::devuelveInfo(){
 bool ListaArticulos::existeCodigo(QString pCodigo){
     NodoArticulo * tmp = primerNodo;
     while(tmp != NULL){
-        if (tmp->articulo->codigo == pCodigo)
+        if (tmp->articulo->codigo == pCodigo){
+            qCritical() << "El código del artículo " + pCodigo + " ya se encuentra en la lista de artículos.";
             return true;
+        }
         tmp = tmp->siguiente;
     }
     return false;
@@ -92,11 +94,28 @@ void ListaArticulos::limpiarMemoria(){
 
 bool ListaArticulos::validarDatos(QString pCodigo, QString pCantidadAlmacen, QString pTiempoFabricacionSegundos,
                   QString pCategoria, QString pUbicacionBodega){
-    if (validarFormato(pCodigo, reCodigoArticulo) && validarFormato(pCantidadAlmacen, reCantidadEnAlmacen) &&
-        validarFormato(pTiempoFabricacionSegundos, reTiempoFabricacionSeg) &&
-        validarFormato(pCategoria, reCategoria) && validarFormato(pUbicacionBodega, reUbicacionBodega))
-        return true;
-    return false;
+    if (!validarFormato(pCodigo, reCodigoArticulo)){
+        qCritical() << "El código del artículo " + pCodigo + " cuenta con un formato incorrecto.";
+        return false;
+    }
+    else if(!validarFormato(pCantidadAlmacen, reCantidadEnAlmacen)){
+        qCritical() << "La cantidad en almacén debe ser 0 o mayor (" << pCantidadAlmacen << ").";
+        return false;
+    }
+    else if (!validarFormato(pTiempoFabricacionSegundos, reTiempoFabricacionSeg)){
+        qCritical() << "El tiempo de fabricación debe ser mayor a 0 (" << pTiempoFabricacionSegundos << ").";
+        return false;
+    }
+    else if (!validarFormato(pCategoria, reCategoria)){
+        qCritical() << "La categoria debe ser A, B o C (" << pCategoria << ").";
+        return false;
+    }
+    else if (!validarFormato(pUbicacionBodega, reUbicacionBodega)){
+        qCritical() << "La ubicación en bodega debe ser una letra mayúscula," <<
+                       "seguido de un número del 01 al 10 (" << pUbicacionBodega << ").";
+        return false;
+    }
+    return true;
 }
 
 bool ListaArticulos::cargarEnMemoria(){
@@ -105,6 +124,7 @@ bool ListaArticulos::cargarEnMemoria(){
     QStringList list = separaAtributos(str);
     for (int i = 0; i < list.length(); i+=5){
         if (!validarDatos(list.at(i), list.at(i+1), list.at(i+2), list.at(i+3), list.at(i+4)) || existeCodigo(list.at(i))){
+            qCritical() << "Error en la línea" << largo()+1 << "en el archivo de los artículos";
             limpiarMemoria();
             return false;
         }
