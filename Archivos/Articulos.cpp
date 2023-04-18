@@ -10,9 +10,9 @@ QRegularExpression reUbicacionBodega("^[A-Z](0[1-9]|10){1}$");
 
 // Métodos Articulo
 QString Articulo::devuelveInfo(){
-    return ("\nCódigo " + codigo + "\nCantidad en almacen: " + QString::number(cantidadAlmacen) +
-            "\nTiempo de fabricación (segundos): " + QString::number(tiempoFabricacionSegundos) +
-            "\nCategoría: " + categoria + "\nUbicación: " + ubicacionBodega);
+    return ("\r\nCódigo " + codigo + "\r\nCantidad en almacen: " + QString::number(cantidadAlmacen) +
+            "\r\nTiempo de fabricación (segundos): " + QString::number(tiempoFabricacionSegundos) +
+            "\r\nCategoría: " + categoria + "\r\nUbicación: " + ubicacionBodega);
 }
 
 // Métodos NodoArticulo
@@ -65,7 +65,7 @@ QString ListaArticulos::devuelveInfo(){
         tmp = tmp->siguiente;
     }
     delete tmp;
-    return (info + "\n");
+    return (info + "\r\n");
 }
 
 bool ListaArticulos::existeCodigo(QString pCodigo){
@@ -119,8 +119,7 @@ bool ListaArticulos::validarDatos(QString pCodigo, QString pCantidadAlmacen, QSt
 }
 
 bool ListaArticulos::cargarEnMemoria(){
-    QString str = retornarTextoArchivo("C:\\Users\\sotic\\"
-                                       "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaArticulos.txt");
+    QString str = retornarTextoArchivo("ArchivosDeTexto\\Articulos.txt");
     QStringList list = separaAtributos(str);
     for (int i = 0; i < list.length(); i+=5){
         if (!validarDatos(list.at(i), list.at(i+1), list.at(i+2), list.at(i+3), list.at(i+4)) || existeCodigo(list.at(i))){

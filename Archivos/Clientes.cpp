@@ -7,7 +7,7 @@ QRegularExpression rePrioridad("^([1-9]|10){1}$");
 
 // Funciones Cliente
 QString Cliente::devuelveInfo(){
-    return "\nCliente " + codigo + "\nNombre: " + nombre + "\nPrioridad: " +  QString::number(prioridad);
+    return "\r\nCliente " + codigo + "\r\nNombre: " + nombre + "\r\nPrioridad: " +  QString::number(prioridad);
 }
 
 // Funciones NodoCliente
@@ -60,7 +60,7 @@ QString ListaClientes::devuelveInfo(){
         info += tmp->devuelveInfo();
         tmp = tmp->siguiente;
     }
-    return (info + "\n");
+    return (info + "\r\n");
 }
 
 int ListaClientes::largo(){
@@ -99,8 +99,7 @@ bool ListaClientes::validarDatos(QString pCodigo, QString pPrioridad){
 }
 
 bool ListaClientes::cargarEnMemoria(){
-    QString str = retornarTextoArchivo("C:\\Users\\sotic\\"
-                                       "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaClientes.txt");
+    QString str = retornarTextoArchivo("ArchivosDeTexto\\Clientes.txt");
     QStringList list = separaAtributos(str);
     for (int i = 0; i < list.length(); i+=3){
         if (!validarDatos(list.at(i), list.at(i+2)) || existeCodigo(list.at(i))){
