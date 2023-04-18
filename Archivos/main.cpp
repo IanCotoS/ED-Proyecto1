@@ -12,23 +12,28 @@ int main(int argc, char *argv[])
     qDebug() << retornarTextoArchivo("C:\\Users\\sotic\\"
                             "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaClientes.txt");
                             // Solo así me sirvió la lectura porque la dirección no me servía, cambiarlo luego
+    QString str = retornarTextoArchivo("C:\\Users\\sotic\\"
+                         "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaClientes.txt");
+    qDebug() << separaAtributos(str);
     */
 
-    // Pruebas Clientes
+    /* Pruebas Clientes
     ListaClientes * listaClientes = new ListaClientes();
     if(listaClientes->cargarEnMemoria())
         qInfo() << listaClientes->devuelveInfo();
     else{
         qInfo() << "Falló";
     }
+    */
 
-    // Pruebas Articulos
+    /* Pruebas Articulos
     ListaArticulos * listaArticulos = new ListaArticulos();
     if(listaArticulos->cargarEnMemoria())
         qInfo() << listaArticulos->devuelveInfo();
     else{
         qInfo() << "Falló";
     }
+    */
 
     return a.exec();
 }

@@ -37,8 +37,9 @@ QString crearArchivoTxt(QString pNombreArchivo, QString pContenido){
 
 QStringList separaAtributos(QString str){
     // Separa los datos en una lista temporal por los espacios (\t, \n, \r\n)
-    static QRegularExpression re("\\s+");
-    return str.split(re);
+    //str = str.replace("\r\n", "\t");
+    static QRegularExpression re("\\t");
+    return str.replace("\r\n", "\t").split(re); // Cambia el salto de línea por tab, y lo separa todo en una lista
 }
 
 bool validarFormato(QString pString, QRegularExpression pExpresionRegular){
