@@ -73,16 +73,15 @@ int ListaClientes::largo(){
     return cant;
 }
 
-bool ListaClientes::existeCodigo(QString pCodigo){
+Cliente * ListaClientes::devuelveCliente(QString pCodigo){
     NodoCliente * tmp = primerNodo;
     while(tmp != NULL){
         if (tmp->cliente->codigo == pCodigo){
-            qCritical() << "El código " + pCodigo + " ya se encuentra en la lista de clientes.";
-            return true;
+            return tmp->cliente;
         }
         tmp = tmp->siguiente;
     }
-    return false;
+    return NULL;
 }
 
 bool ListaClientes::validarDatos(QString pCodigo, QString pPrioridad){
@@ -102,10 +101,15 @@ bool ListaClientes::cargarEnMemoria(){
     QString str = retornarTextoArchivo("ArchivosDeTexto\\Clientes.txt");
     QStringList list = separaAtributos(str);
     for (int i = 0; i < list.length(); i+=3){
-        if (!validarDatos(list.at(i), list.at(i+2)) || existeCodigo(list.at(i))){
+        if (!validarDatos(list.at(i), list.at(i+2))){
             qCritical() << "Error en la línea" << largo()+1 << "en el archivo de los clientes";
             limpiarMemoria();
             return false; // Luego, en la simulación, se debe evaluar si no es null para seguir
+        }
+        else if (devuelveCliente(list.at(i)) != NULL){
+            qCritical() << "El código " + list.at(i) + " ya se encuentra en la lista de clientes.";
+            limpiarMemoria();
+            return false;
         }
         this->insertarAlFinal(new Cliente(list.at(i), list.at(i+1), list.at(i+2).toInt()));
     }

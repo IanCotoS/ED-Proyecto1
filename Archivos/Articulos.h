@@ -16,19 +16,21 @@ struct Articulo{
 
     // Miembros
     QString codigo;
-    int cantidadAlmacen;
+    int cantidad;
     int tiempoFabricacionSegundos;
     QString categoria;
     QString ubicacionBodega;
+    int cantidadReal;
 
     // Constructor
-    Articulo(QString pCodigo, int pCantidadAlmacen, int pTiempoFabricacionSegundos,
+    Articulo(QString pCodigo, int pCantidad , int pTiempoFabricacionSegundos,
              QString pCategoria, QString pUbicacionBodega){
         codigo = pCodigo;
-        cantidadAlmacen = pCantidadAlmacen;
+        cantidad = pCantidad ;
         tiempoFabricacionSegundos = pTiempoFabricacionSegundos;
         categoria = pCategoria;
         ubicacionBodega = pUbicacionBodega;
+        cantidadReal = pCantidad;
     }
 
     // Encabezado de funciones
@@ -55,7 +57,7 @@ struct NodoArticulo{
     }
 
     NodoArticulo(QString pCodigo, int pCantidadAlmacen, int pTiempoFabricacion,
-                 QString pCategoria, QString pUbicacionBodega){
+                 QString pCategoria, QString pUbicacionBodega, int pCantidadReal){
         siguiente = anterior = NULL;
         articulo = new Articulo(pCodigo, pCantidadAlmacen, pTiempoFabricacion,
                                pCategoria, pUbicacionBodega);
@@ -82,7 +84,7 @@ struct ListaArticulos{
     void limpiarMemoria();
     int largo();
     QString devuelveInfo();
-    bool existeCodigo(QString);
+    Articulo * devuelveArticulo(QString);
     bool validarDatos(QString, QString, QString, QString, QString);
     bool cargarEnMemoria();
 }; // Fin Struct ListaArticulos

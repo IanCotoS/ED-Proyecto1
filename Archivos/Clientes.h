@@ -74,7 +74,7 @@ struct ListaClientes{
     void limpiarMemoria();
     QString devuelveInfo();
     int largo();
-    bool existeCodigo(QString);
+    Cliente * devuelveCliente(QString);
     bool validarDatos(QString, QString);
     bool cargarEnMemoria();
 }; // Fin Struct ListaClientes
