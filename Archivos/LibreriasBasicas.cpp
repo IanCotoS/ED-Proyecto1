@@ -20,7 +20,7 @@ QString retornarTextoArchivo(QString pNombreArchivo){
     return texto;
 }
 
-QString crearArchivoTxt(QString pNombreArchivo, QString pContenido){
+QString crearArchivo(QString pNombreArchivo, QString pContenido){
     QFile file(pNombreArchivo);
     QString texto;
     if (!file.open(QIODevice::WriteOnly)){

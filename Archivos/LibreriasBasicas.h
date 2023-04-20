@@ -8,6 +8,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QRegularExpression>
+#include <QDir>
 
 using namespace std;
 
@@ -15,6 +16,6 @@ using namespace std;
 
 // Declaración de funciones
 QString retornarTextoArchivo(QString);
-QString crearArchivoTxt(QString, QString);
+QString crearArchivo(QString, QString);
 QStringList separaAtributos(QString);
 bool validarFormato(QString, QRegularExpression);
