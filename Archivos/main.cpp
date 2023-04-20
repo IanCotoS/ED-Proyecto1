@@ -1,19 +1,15 @@
 #include <QApplication>
 #include "LibreriasBasicas.h"
-#include "Clientes.h"
-#include "Articulos.h"
+#include "Pedidos.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     // Archivos
-
-    qDebug() << crearArchivoTxt("ArchivosDeTexto\\Prueba.txt", "NUEVO\t"); // Se agrega a la carpeta build...
-                                                // Por lo tanto, se debe escribir pensando que ese el el path inicial
-
-    qDebug() << retornarTextoArchivo("ArchivosDeTexto\\Prueba.txt");
-                            // Solo así me sirvió la lectura porque la dirección no me servía, cambiarlo luego
     /*
+    qDebug() << crearArchivo("ArchivosDeTexto\\Prueba.txt", "NUEVO\t"); // Se agrega a la carpeta build...
+                                                // Por lo tanto, se debe escribir pensando que ese el el path inicial
+    qDebug() << retornarTextoArchivo("ArchivosDeTexto\\Prueba.txt");
     QString str = retornarTextoArchivo("C:\\Users\\sotic\\"
                          "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaClientes.txt");
     qDebug() << separaAtributos(str);
@@ -31,5 +27,11 @@ int main(int argc, char *argv[])
     if(listaArticulos->cargarEnMemoria())
         qInfo() << "\r\nLista de Articulos:\r\n" << listaArticulos->devuelveInfo();
 
+    ColaPedidoPrioridad * colaPedido = new ColaPedidoPrioridad();
+    colaPedido->cargarEnMemoria(listaClientes, listaArticulos);
+    qInfo() << "\r\nCola de prioridad:\r\n"; //<< colaPedido->devuelveInfo();
+    qInfo() << colaPedido->desencolar()->devuelveInfo();
+    qInfo() << colaPedido->desencolar()->devuelveInfo();
+    qInfo() << colaPedido->desencolar()->devuelveInfo();
     return a.exec();
 }
