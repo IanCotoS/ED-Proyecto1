@@ -7,12 +7,13 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     // Archivos
-    /*
-    qDebug() << crearArchivoTxt("ArchivosDeTexto\\Prueba.txt", "NUEVO"); // Se agrega a la carpeta build...
+
+    qDebug() << crearArchivoTxt("ArchivosDeTexto\\Prueba.txt", "NUEVO\t"); // Se agrega a la carpeta build...
                                                 // Por lo tanto, se debe escribir pensando que ese el el path inicial
 
     qDebug() << retornarTextoArchivo("ArchivosDeTexto\\Prueba.txt");
                             // Solo así me sirvió la lectura porque la dirección no me servía, cambiarlo luego
+    /*
     QString str = retornarTextoArchivo("C:\\Users\\sotic\\"
                          "OneDrive\\Documentos\\GitHub\\ED-Proyecto1\\Archivos\\txt\\ListaClientes.txt");
     qDebug() << separaAtributos(str);
