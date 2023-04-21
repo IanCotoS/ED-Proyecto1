@@ -9,7 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Alistados.cpp \
+    Alistadores.cpp \
     Articulos.cpp \
     Balanceador.cpp \
     Bodega.cpp \
@@ -21,8 +21,7 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
-    Alistados.h \
-    Articulos.h \
+    Alistadores.h \
     Artículos.h \
     Balanceador.h \
     Bodega.h \

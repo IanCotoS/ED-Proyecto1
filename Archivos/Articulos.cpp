@@ -9,11 +9,15 @@ QRegularExpression reCategoria("^(A|B|C)$");
 QRegularExpression reUbicacionBodega("^[A-Z](0[1-9]|10){1}$");
 
 // Métodos Articulo
+bool Articulo::estaListo(){
+    return cantidadComparable == 0;
+}
+
 QString Articulo::devuelveInfo(){
     return ("\r\nCódigo " + codigo + "\r\nCantidad en almacen: " + QString::number(cantidad) +
             "\r\nTiempo de fabricación (segundos): " + QString::number(tiempoFabricacionSegundos) +
             "\r\nCategoría: " + categoria + "\r\nUbicación: " + ubicacionBodega +
-            "\r\nCantidad real: " + QString::number(cantidadReal));
+            "\r\nCantidad real: " + QString::number(cantidadComparable));
 }
 
 // Métodos NodoArticulo
@@ -58,6 +62,16 @@ int ListaArticulos::largo(){
     return i;
 }
 
+bool ListaArticulos::estaListo(){
+    NodoArticulo * temp = primerNodo;
+    while (temp!=NULL){
+        if (!temp->articulo->estaListo())
+            return false;
+        temp = temp->siguiente;
+    }
+    return true;
+}
+
 QString ListaArticulos::devuelveInfo(){
     NodoArticulo * tmp = primerNodo;
     QString info = "";
@@ -67,6 +81,17 @@ QString ListaArticulos::devuelveInfo(){
     }
     delete tmp;
     return (info + "\r\n");
+}
+
+Articulo * ListaArticulos::devuelveArticulo(int pos){
+    int i = 0;
+    NodoArticulo * temp = primerNodo;
+    while (temp!=NULL){
+        if (pos == i)
+            return temp->articulo;
+        temp = temp->siguiente;
+    }
+    return NULL;
 }
 
 Articulo * ListaArticulos::devuelveArticulo(QString pCodigo){
